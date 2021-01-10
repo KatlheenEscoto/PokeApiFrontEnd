@@ -13,6 +13,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { ReactiveFormsModule } from '@angular/forms';
 import { PokemonListComponent } from './features/components/home/pokemon-list/pokemon-list.component';
+import { SortPipe } from './shared/pipes/sort.pipe';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { PokemonListComponent } from './features/components/home/pokemon-list/po
     FooterComponent,
     HeaderComponent,
     PokemonDetailsComponent,
-    PokemonListComponent
+    PokemonListComponent,
+    SortPipe
   ],
   imports: [
     BrowserModule,
@@ -32,7 +34,7 @@ import { PokemonListComponent } from './features/components/home/pokemon-list/po
     ScrollingModule,
     ReactiveFormsModule
   ],
-  providers: [],
+  providers: [SortPipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
