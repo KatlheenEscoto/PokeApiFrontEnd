@@ -3,6 +3,7 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { PokemonDialogBodyComponent } from '../pokemon-dialog-body/pokemon-dialog-body.component';
 import { PokemonMoveDialogBodyComponent } from '../pokemon-move-dialog-body/pokemon-move-dialog-body.component';
 import { PokemonService } from '../../../services/pokemon.service';
+import { SortPipe } from '../../../../shared/pipes/sort.pipe';
 
 @Component({
   selector: 'app-pokemon-move-list',
@@ -12,10 +13,12 @@ import { PokemonService } from '../../../services/pokemon.service';
 export class PokemonMoveListComponent implements OnInit {
 
   @Input() moveList;
+  @Input() chargeData;
   numbers: number[] = [];
 
   constructor(private matDialog: MatDialog, 
-              private _pokemon: PokemonService) { 
+              private _pokemon: PokemonService,
+              private sortPipe: SortPipe) { 
   }
 
   ngOnInit(): void {
@@ -48,6 +51,16 @@ export class PokemonMoveListComponent implements OnInit {
         console.log(error);
       }
     );
+  }
+
+  orderByDesc() {
+    this.moveList = this.sortPipe.transform(this.moveList, "desc", "name");
+    console.log(this.moveList);
+  }
+
+  orderByAsc() {
+    this.moveList = this.sortPipe.transform(this.moveList, "asc", "name");
+    console.log(this.moveList);
   }
 
 }

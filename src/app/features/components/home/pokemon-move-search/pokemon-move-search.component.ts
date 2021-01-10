@@ -37,7 +37,6 @@ export class PokemonMoveSearchComponent implements OnInit {
   }
 
   async getMoves() {
-
     for(let i = this.startIndex; i <= this.finalIndex; i++){
       await this.getMove(i);
     }
