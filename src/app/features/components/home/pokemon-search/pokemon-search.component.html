@@ -1,0 +1,18 @@
+<p>pokemon-search works!</p>
+<div class="content">
+   <!--<cdk-virtual-scroll-viewport itemSize="200" class="viewport">
+        <mat-card *cdkVirtualFor="let pokemon of pokemons">
+            <mat-card-title>{{pokemon.name | uppercase }}</mat-card-title>
+            <mat-card-content>
+                {{pokemon.url}}
+            </mat-card-content>
+        </mat-card>
+    </cdk-virtual-scroll-viewport> -->
+
+    <div *ngIf="chargeData">
+      <app-pokemon-list
+      [pokemonList]="pokemons"
+      >
+      </app-pokemon-list>
+    </div>
+</div>

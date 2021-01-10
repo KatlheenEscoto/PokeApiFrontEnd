@@ -14,6 +14,7 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
 import { ReactiveFormsModule } from '@angular/forms';
 import { PokemonListComponent } from './features/components/home/pokemon-list/pokemon-list.component';
 import { SortPipe } from './shared/pipes/sort.pipe';
+import { PokemonSearchComponent } from './features/components/home/pokemon-search/pokemon-search.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { SortPipe } from './shared/pipes/sort.pipe';
     HeaderComponent,
     PokemonDetailsComponent,
     PokemonListComponent,
-    SortPipe
+    SortPipe,
+    PokemonSearchComponent
   ],
   imports: [
     BrowserModule,

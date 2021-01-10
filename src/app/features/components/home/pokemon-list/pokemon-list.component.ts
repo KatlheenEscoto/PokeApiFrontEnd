@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { PokemonService } from '../../../services/pokemon.service';
-import { Pokemon } from '../../../../shared/models/pokemon';
 import { SortPipe } from '../../../../shared/pipes/sort.pipe';
 
 @Component({
@@ -10,36 +9,13 @@ import { SortPipe } from '../../../../shared/pipes/sort.pipe';
 })
 export class PokemonListComponent implements OnInit {
 
-  pokemons:Pokemon[] = [];
-  pokemon: Pokemon;
-  startIndex: number;
-  finalIndex: number;
+  @Input() pokemonList;
 
-
-  constructor(private _pokemon: PokemonService,
-              private sortPipe: SortPipe) 
-  { 
-    this.startIndex = 1;
-    this.finalIndex = 150;
-  }
+  constructor(private sortPipe: SortPipe) { }
 
   ngOnInit(): void {
-    this.getPokemons();
+
+    const sortedArr = this.sortPipe.transform(this.pokemonList, "desc", "name");
+
   }
-
-  async getPokemon(index: number) {
-    this.pokemon = await this._pokemon.getPokemon(index).toPromise();
-    if(this.pokemon){
-      this.pokemons.push(this.pokemon);
-    }
-  }
-
-  async getPokemons(){
-    for(let i = 1; i <= 150; i++){
-      await this.getPokemon(i);
-    }
-  }
-
-
-
 }
