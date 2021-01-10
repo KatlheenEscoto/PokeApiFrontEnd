@@ -4,6 +4,7 @@ import { PokemonDetailsComponent } from './features/components/home/pokemon-deta
 import { PokemonSearchComponent } from './features/components/home/pokemon-search/pokemon-search.component';
 import { PokemonMoveListComponent } from './features/components/home/pokemon-move-list/pokemon-move-list.component';
 import { PokemonMoveSearchComponent } from './features/components/home/pokemon-move-search/pokemon-move-search.component';
+import { PokemonItemSearchComponent } from './features/components/home/pokemon-item-search/pokemon-item-search.component';
 
 const routes: Routes = [
   {
@@ -17,6 +18,10 @@ const routes: Routes = [
   {
     path: 'moves',
     component: PokemonMoveSearchComponent
+  },
+  {
+    path: 'items',
+    component: PokemonItemSearchComponent
   },
   {
     path: '',

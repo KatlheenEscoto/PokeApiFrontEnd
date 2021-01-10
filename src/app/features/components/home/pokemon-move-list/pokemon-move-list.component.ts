@@ -1,6 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
-import { PokemonDialogBodyComponent } from '../pokemon-dialog-body/pokemon-dialog-body.component';
 import { PokemonMoveDialogBodyComponent } from '../pokemon-move-dialog-body/pokemon-move-dialog-body.component';
 import { PokemonService } from '../../../services/pokemon.service';
 import { SortPipe } from '../../../../shared/pipes/sort.pipe';

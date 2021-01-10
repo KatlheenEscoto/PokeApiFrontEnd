@@ -14,7 +14,6 @@ export class PokemonService {
 
   constructor(private http: HttpClient) { }
 
-
   getPokemons() {
     return this.http.get<any>(`${this.baseUrl}/pokemon`);
   }
@@ -29,6 +28,14 @@ export class PokemonService {
 
   getMove(id: number): Observable<MoveAll> {
     return this.http.get<MoveAll>(`${this.baseUrl}/move/${id}`);
+  }
+
+  getItems() {
+    return this.http.get<any>(`${this.baseUrl}/item`);
+  }
+
+  getItem(id: number) {
+    return this.http.get<any>(`${this.baseUrl}/item/${id}`);
   }
 
 }

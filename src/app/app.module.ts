@@ -19,6 +19,9 @@ import { PokemonMoveListComponent } from './features/components/home/pokemon-mov
 import { PokemonDialogBodyComponent } from './features/components/home/pokemon-dialog-body/pokemon-dialog-body.component';
 import { PokemonMoveDialogBodyComponent } from './features/components/home/pokemon-move-dialog-body/pokemon-move-dialog-body.component';
 import { PokemonMoveSearchComponent } from './features/components/home/pokemon-move-search/pokemon-move-search.component';
+import { PokemonItemDialogBodyComponent } from './features/components/home/pokemon-item-dialog-body/pokemon-item-dialog-body.component';
+import { PokemonItemSearchComponent } from './features/components/home/pokemon-item-search/pokemon-item-search.component';
+import { PokemonItemListComponent } from './features/components/home/pokemon-item-list/pokemon-item-list.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +35,10 @@ import { PokemonMoveSearchComponent } from './features/components/home/pokemon-m
     PokemonMoveListComponent,
     PokemonDialogBodyComponent,
     PokemonMoveDialogBodyComponent,
-    PokemonMoveSearchComponent
+    PokemonMoveSearchComponent,
+    PokemonItemDialogBodyComponent,
+    PokemonItemSearchComponent,
+    PokemonItemListComponent
   ],
   imports: [
     BrowserModule,
@@ -48,7 +54,8 @@ import { PokemonMoveSearchComponent } from './features/components/home/pokemon-m
   bootstrap: [AppComponent],
   entryComponents: [
     PokemonDialogBodyComponent,
-    PokemonMoveDialogBodyComponent
+    PokemonMoveDialogBodyComponent,
+    PokemonItemDialogBodyComponent
   ]
 })
 export class AppModule { }

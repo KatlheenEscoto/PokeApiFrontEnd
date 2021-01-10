@@ -1,0 +1,24 @@
+<h2 mat-dialog-title>{{data.name | uppercase}}</h2>
+
+<mat-dialog-content>
+    <p><b>ID: </b>{{data.id}}</p>
+    <p><b>NAME: </b>{{data.name}}</p>
+    <p><b>EFFECTS: </b>
+    <p *ngFor="let effect of data.effect">
+        <em>Effect:</em> {{effect.effect}}
+        <br>
+        <em>Short Effect:</em> {{effect.short_effect}}
+    </p>
+    <p><b>ATTRIBUTES:</b></p>
+    <p *ngFor="let attribute of data.attributes">
+        <li>{{attribute.name}}</li>
+    </p>
+    <p><b>CATEGORY: </b>{{data.category}}</p>
+    <p><b>COST: </b>{{data.cost}}</p>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+    <button mat-icon-button color="warn" aria-label="close" (click)="close()">
+        <mat-icon>close</mat-icon>
+    </button>
+</mat-dialog-actions>
