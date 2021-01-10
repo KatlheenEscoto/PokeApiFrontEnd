@@ -31,8 +31,8 @@ export class PokemonSearchComponent implements OnInit {
     this.getPokemons();
   }
 
-  async getPokemon(index: number) {
-    const response: PokemonAll = await this._pokemon.getPokemon(index).toPromise();
+  async getPokemon(id: number) {
+    const response: PokemonAll = await this._pokemon.getPokemon(id).toPromise();
     if(response) {
       this.pokemon = new Pokemon();
       this.pokemon.name = response.name;

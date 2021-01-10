@@ -1,0 +1,9 @@
+@import "../../../../../assets/styles/variables.scss";
+
+h1 {
+    text-align: center;
+}
+
+.mat-spinner-color::ng-deep circle{
+    stroke: $red !important;
+}

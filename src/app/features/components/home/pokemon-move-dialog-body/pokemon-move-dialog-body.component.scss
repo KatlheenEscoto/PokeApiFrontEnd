@@ -1,0 +1,15 @@
+@import '../../../../../assets/styles/variables.scss';
+
+mat-card {
+    width: 200px;
+}
+
+h2 {
+    text-align: center;
+    background-color: $light_yellow;
+    padding: 1rem;
+}
+
+::ng-deep.mat-dialog-content {
+    text-align: center;
+}

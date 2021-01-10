@@ -15,6 +15,10 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { PokemonListComponent } from './features/components/home/pokemon-list/pokemon-list.component';
 import { SortPipe } from './shared/pipes/sort.pipe';
 import { PokemonSearchComponent } from './features/components/home/pokemon-search/pokemon-search.component';
+import { PokemonMoveListComponent } from './features/components/home/pokemon-move-list/pokemon-move-list.component';
+import { PokemonDialogBodyComponent } from './features/components/home/pokemon-dialog-body/pokemon-dialog-body.component';
+import { PokemonMoveDialogBodyComponent } from './features/components/home/pokemon-move-dialog-body/pokemon-move-dialog-body.component';
+import { PokemonMoveSearchComponent } from './features/components/home/pokemon-move-search/pokemon-move-search.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +28,11 @@ import { PokemonSearchComponent } from './features/components/home/pokemon-searc
     PokemonDetailsComponent,
     PokemonListComponent,
     SortPipe,
-    PokemonSearchComponent
+    PokemonSearchComponent,
+    PokemonMoveListComponent,
+    PokemonDialogBodyComponent,
+    PokemonMoveDialogBodyComponent,
+    PokemonMoveSearchComponent
   ],
   imports: [
     BrowserModule,
@@ -37,6 +45,10 @@ import { PokemonSearchComponent } from './features/components/home/pokemon-searc
     ReactiveFormsModule
   ],
   providers: [SortPipe],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [
+    PokemonDialogBodyComponent,
+    PokemonMoveDialogBodyComponent
+  ]
 })
 export class AppModule { }
