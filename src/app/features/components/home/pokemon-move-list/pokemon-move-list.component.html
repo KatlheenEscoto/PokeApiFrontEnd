@@ -1,24 +1,86 @@
-<div *ngFor="let person of people | filter: peopleFilter">
-    {{person.name}}
-</div>
-
 <div *ngIf="chargeData; else elseBlock">
-    <!--<h1 style="text-align: right; padding-right: 1rem;">Moves</h1> -->
-    <section>
-        Order By:
-        <div class="example-button-row">
-          <button mat-raised-button color="success" style="margin-right: 0.2rem;" (click)="orderByAsc()">A-Z</button>
-          <button mat-raised-button color="success" (click)="orderByDesc()">Z-A</button>
-        </div>
-    </section>
-
-    <ul class="list">
-        <cdk-virtual-scroll-viewport  style="height: 450px" itemSize="90" >
-            <ng-container *cdkVirtualFor="let move of moveList">
-            <li><button mat-button (click)="openDialog(move.id)">{{move.name}}</button></li>
-            </ng-container>
-        </cdk-virtual-scroll-viewport>
-    </ul>
+    <h1>Moves</h1>
+    <div fxLayout="row wrap" fxLayoutGap="1.5rem grid">
+            <div fxFlex="50%" fxFlex.xs="100%" fxFlex.sm="100%">
+                <section>
+                    <h2>Filter By</h2>
+                    <div>
+                        <form [formGroup]="moveForm" (ngSubmit)="onSubmit()">
+                            <p>
+                                <mat-form-field appearance="outline">
+                                  <mat-label>Filter by name</mat-label>
+                                  <input matInput type="text" name="name" placeholder="Filter by name" formControlName="name">
+                                  <mat-icon matSuffix>search</mat-icon>   
+                                </mat-form-field>
+                            </p>                        
+                            <p>
+                                <mat-form-field appearance="outline">
+                                    <mat-label>Find by type</mat-label>
+                                    <input
+                                      matInput 
+                                      type="text" 
+                                      formControlName="type_name"
+                                      [matAutocomplete]="auto1" />
+                                    <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" #auto1>
+                                      <mat-option *ngFor="let option of options" [value]="option">
+                                        {{ option }}
+                                      </mat-option>
+                                    </mat-autocomplete>
+                                    <mat-icon matSuffix>search</mat-icon> 
+                                </mat-form-field>
+                            </p>
+                            <p>
+                                <mat-form-field appearance="outline">
+                                    <mat-label>Find by category</mat-label>
+                                    <input
+                                      matInput 
+                                      type="text" 
+                                      formControlName="category_name"
+                                      [matAutocomplete]="auto2" />
+                                    <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" #auto2>
+                                      <mat-option *ngFor="let category of categories" [value]="category">
+                                        {{ category }}
+                                      </mat-option>
+                                    </mat-autocomplete>
+                                    <mat-icon matSuffix>search</mat-icon> 
+                                </mat-form-field>
+                            </p>
+                            <section>
+                                <div class="example-button-row">
+                                    <button mat-raised-button color="primary" style="margin-right: 0.2rem;" type="submit">Filter</button>
+                                    <button mat-raised-button color="primary" style="margin-right: 0.2rem;" type="button" (click)="clear()">Clear</button>
+                                </div>
+                            </section>
+                        </form>
+                    </div>
+                </section>
+                <br>
+                <section>
+                    <h2>Order By</h2>
+                    <div class="example-button-row">
+                        <button mat-raised-button color="success" (click)="orderByAsc()"  style="margin-right: 0.2rem;" >A-Z</button>
+                        <button mat-raised-button color="success" (click)="orderByDesc()" style="margin-right: 0.2rem;">Z-A</button>
+                    </div>
+                </section>
+                <br>
+                <section>
+                    <h2>Get Original Data</h2>
+                    <div class="example-button-row">
+                        <button mat-raised-button color="success" (click)="originalList()">Original</button>
+                    </div>
+                </section>
+            </div>
+            <div fxFlex="50%" fxFlex.xs="100%" fxFlex.sm="100%">
+                <!--List-->
+                <ul class="list">
+                    <cdk-virtual-scroll-viewport  style="height: 450px" itemSize="90" >
+                        <ng-container *cdkVirtualFor="let move of moveList">
+                        <li><button mat-button (click)="openDialog(move.id)">{{move.name}}</button></li>
+                        </ng-container>
+                    </cdk-virtual-scroll-viewport>
+                </ul>
+            </div>
+    </div>
 </div>
 <ng-template #elseBlock>
     <div fxLayout="column" fxLayoutAlign="center center">

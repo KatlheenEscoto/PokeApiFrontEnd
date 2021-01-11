@@ -3,6 +3,8 @@
 <mat-dialog-content>
     <p><b>ID: </b>{{data.id}}</p>
     <p><b>NAME: </b>{{data.name}}</p>
+    <p><b>TYPE: </b>{{data.type_name}}</p>
+    <p><b>CATEGORY: </b> {{data.category_name}}</p>
     <p><b>POWER POINTS: </b>{{data.pp}}</p>
     <p><b>EFFECTS: </b></p>
     <p *ngFor="let effect of data.effect">

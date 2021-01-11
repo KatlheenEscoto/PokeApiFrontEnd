@@ -1,17 +1,7 @@
 <div class="content">
-    <h1>Pokemons</h1>
-
-        <div fxLayout="row wrap" fxLayoutGap="1.5rem grid">
-                <div fxFlex="50%" fxFlex.xs="100%" fxFlex.sm="100%">
-                <h2>Filter By</h2>
-                </div>
-                <div fxFlex="50%" fxFlex.xs="100%" fxFlex.sm="100%">
-                    <!--List-->
-                    <app-pokemon-list
-                        [pokemonList]="pokemons"
-                        [chargeData]="chargeData"
-                    >
-                    </app-pokemon-list>
-                </div>
-        </div>  
+    <app-pokemon-list
+        [pokemonList]="pokemons"
+        [chargeData]="chargeData"
+    >
+    </app-pokemon-list>
 </div>

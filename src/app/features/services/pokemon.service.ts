@@ -38,4 +38,12 @@ export class PokemonService {
     return this.http.get<any>(`${this.baseUrl}/item/${id}`);
   }
 
+  getTypes() {
+    return this.http.get<any>(`${this.baseUrl}/type`);
+  }
+
+  getCategories() {
+    return this.http.get<any>(`${this.baseUrl}/move-category`);
+  }
+
 }
