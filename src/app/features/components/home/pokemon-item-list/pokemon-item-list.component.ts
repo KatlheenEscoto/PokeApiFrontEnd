@@ -15,7 +15,7 @@ export class PokemonItemListComponent implements OnInit {
   @Input() itemList;
   @Input() chargeData;
   copyItemList: ItemAll[];
-  name: string = 'Hola';
+  name: string = '';
 
   constructor(private matDialog: MatDialog, 
               private _pokemon: PokemonService,
@@ -62,13 +62,15 @@ export class PokemonItemListComponent implements OnInit {
   filter(value) {
     this.itemList = [];
     for(let item of this.copyItemList) {
-      if(value.name && value.name.length > 0 && item.name.includes(value.name)){
+      if(value.name && value.name.length > 0 && item.name.toString().toLocaleLowerCase().includes(value.name.toString().toLocaleLowerCase())){
         this.itemList.push(item);
       }
     }
+
     if(this.itemList.length <= 0) {
       this.itemList = this.copyItemList;
     }
+    
   }
 
   clear() {

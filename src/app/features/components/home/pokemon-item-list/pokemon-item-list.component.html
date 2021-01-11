@@ -7,13 +7,23 @@
                     <h2>Filter By</h2>
                     <div>
                         <form #formFilter="ngForm" (ngSubmit)="filter(formFilter.value)">
-                            <input type="text" name="name" [(ngModel)]="name" placeholder="Filter By Name">
-                            <br><br>
-                            <button>Filter</button>
-                            <button type="button" (click)="clear()">Clear</button>
+                            <p>
+                                <mat-form-field appearance="outline">
+                                  <mat-label>Filter by name</mat-label>
+                                  <input matInput type="text" name="name" [(ngModel)]="name" placeholder="Filter by name">
+                                  <mat-icon matSuffix>search</mat-icon>   
+                                </mat-form-field>
+                            </p>
+                            <section>
+                                <div class="example-button-row">
+                                    <button mat-raised-button color="primary" style="margin-right: 0.2rem;" type="submit">Filter</button>
+                                    <button mat-raised-button color="primary" style="margin-right: 0.2rem;" type="button" (click)="clear()">Clear</button>
+                                </div>
+                            </section>
                         </form>
                     </div>
                 </section>
+                <br>
                 <section>
                     <h2>Order By</h2>
                     <div class="example-button-row">
