@@ -36,3 +36,7 @@ h2 {
 .mat-icon-button.mat-success {
   color: $black;
 } 
+
+::ng-deep.mat-tab {
+  padding-top: 1rem;
+}

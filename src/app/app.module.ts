@@ -11,7 +11,7 @@ import { MaterialModule } from './core/components/modules/material.module';
 import { HttpClientModule } from '@angular/common/http';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { ScrollingModule } from '@angular/cdk/scrolling';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PokemonListComponent } from './features/components/home/pokemon-list/pokemon-list.component';
 import { SortPipe } from './shared/pipes/sort.pipe';
 import { PokemonSearchComponent } from './features/components/home/pokemon-search/pokemon-search.component';
@@ -48,7 +48,8 @@ import { PokemonItemListComponent } from './features/components/home/pokemon-ite
     MaterialModule,
     FlexLayoutModule,
     ScrollingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FormsModule
   ],
   providers: [SortPipe],
   bootstrap: [AppComponent],

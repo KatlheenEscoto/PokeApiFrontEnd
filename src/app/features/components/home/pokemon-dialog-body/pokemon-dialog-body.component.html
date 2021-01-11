@@ -3,14 +3,14 @@
 <mat-dialog-content>
     <div fxLayout="row" fxLayoutGap="1.5rem grid">
         <div fxFlex="50%" fxFlex.xs="100%" fxFlex.sm="100%">
-            <img [src]="data.sprites.other.dream_world.front_default" [alt]="data.name" width="200px">
+            <img [src]="data.sprites.other.dream_world.front_default" [alt]="data.name" width="200px" height="200px">
         </div>
         <div fxFlex="50%" fxFlex.xs="100%" fxFlex.sm="100%">
             <p><b>ID: </b>{{data.id}}</p>
             <p><b>NAME: </b>{{data.name}}</p>
         </div>
     </div>  
-    <div fxLayout="column">
+    <div fxLayout="column" >
         <mat-tab-group mat-align-tabs="center" style="height: 13rem;">
             <mat-tab label="Stats">
                 <div *ngFor="let stat of data.stats">

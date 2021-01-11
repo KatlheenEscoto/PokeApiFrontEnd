@@ -1,21 +1,40 @@
 <div *ngIf="chargeData; else elseBlock">
-    
-    <section>
-        Order By:
-        <div class="example-button-row">
-          <button mat-raised-button color="success" style="margin-right: 0.2rem;" (click)="orderByAsc()">A-Z</button>
-          <button mat-raised-button color="success" (click)="orderByDesc()">Z-A</button>
-        </div>
-    </section>
+    <h1>Items</h1>
 
-    <ul class="list">
-        <cdk-virtual-scroll-viewport  style="height: 450px" itemSize="90" >
-            <ng-container *cdkVirtualFor="let item of itemList">
-            <li><button mat-button (click)="openDialog(item.id)">{{item.name}}</button></li>
-            </ng-container>
-        </cdk-virtual-scroll-viewport>
-    </ul>
+    <div fxLayout="row wrap" fxLayoutGap="1.5rem grid">
+            <div fxFlex="50%" fxFlex.xs="100%" fxFlex.sm="100%">
+                <section>
+                    <h2>Filter By</h2>
+                    <div>
+                        <form #formFilter="ngForm" (ngSubmit)="filter(formFilter.value)">
+                            <input type="text" name="name" [(ngModel)]="name" placeholder="Filter By Name">
+                            <br><br>
+                            <button>Filter</button>
+                            <button type="button" (click)="clear()">Clear</button>
+                        </form>
+                    </div>
+                </section>
+                <section>
+                    <h2>Order By</h2>
+                    <div class="example-button-row">
+                      <button mat-raised-button color="success" style="margin-right: 0.2rem;" (click)="orderByAsc()">A-Z</button>
+                      <button mat-raised-button color="success" style="margin-right: 0.2rem;" (click)="orderByDesc()">Z-A</button>
+                      <button mat-raised-button color="success" (click)="originalList()">Original</button>
+                    </div>
+                </section>
+            </div>
+            <div fxFlex="50%" fxFlex.xs="100%" fxFlex.sm="100%">        
+                <ul class="list">
+                    <cdk-virtual-scroll-viewport  style="height: 450px" itemSize="90" >
+                        <ng-container *cdkVirtualFor="let item of itemList">
+                        <li><button mat-button (click)="openDialog(item.id)">{{item.name}}</button></li>
+                        </ng-container>
+                    </cdk-virtual-scroll-viewport>
+                </ul>
+            </div>
+    </div>
 </div>
+<!--Loading-->
 <ng-template #elseBlock>
     <div fxLayout="column" fxLayoutAlign="center center">
         <div fxFlex>

@@ -3,6 +3,7 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { PokemonService } from '../../../services/pokemon.service';
 import { SortPipe } from '../../../../shared/pipes/sort.pipe';
 import { PokemonItemDialogBodyComponent } from '../pokemon-item-dialog-body/pokemon-item-dialog-body.component';
+import { ItemAll } from '../../../../shared/models/itemAll';
 
 @Component({
   selector: 'app-pokemon-item-list',
@@ -13,6 +14,8 @@ export class PokemonItemListComponent implements OnInit {
 
   @Input() itemList;
   @Input() chargeData;
+  copyItemList: ItemAll[];
+  name: string = 'Hola';
 
   constructor(private matDialog: MatDialog, 
               private _pokemon: PokemonService,
@@ -20,6 +23,7 @@ export class PokemonItemListComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.copyItemList = this.itemList;
   }
 
   openDialog(id: number) {
@@ -53,6 +57,26 @@ export class PokemonItemListComponent implements OnInit {
   orderByAsc() {
     this.itemList = this.sortPipe.transform(this.itemList, "asc", "name");
     console.log(this.itemList);
+  }
+
+  filter(value) {
+    this.itemList = [];
+    for(let item of this.copyItemList) {
+      if(value.name && value.name.length > 0 && item.name.includes(value.name)){
+        this.itemList.push(item);
+      }
+    }
+    if(this.itemList.length <= 0) {
+      this.itemList = this.copyItemList;
+    }
+  }
+
+  clear() {
+    this.name = '';
+  }
+
+  originalList() {
+    this.itemList = this.copyItemList;
   }
 
 }
