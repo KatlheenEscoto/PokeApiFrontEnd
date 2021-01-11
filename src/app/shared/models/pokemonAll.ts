@@ -49,7 +49,7 @@ export class Move {
     version_group_details: Versiongroupdetail[];
 }
   
-export class Versiongroupdetail {
+export interface Versiongroupdetail {
     level_learned_at: number;
     move_learn_method: Base;
     version_group: Base;

@@ -1,13 +1,60 @@
-.content {
-    padding: 1.5rem;
-}
+@import "../../../../../assets/styles/variables.scss";
 
-/* mat-card {
+mat-card {
     height: 200px;
     margin: 2em;
+    //display: block;
 }
 
-.viewport {
-    height: 400px;
-    width: 100%;
-} */
+ul {
+    max-width: 700px;
+    color: #333;
+    list-style: none;
+    margin: 30px auto;
+    padding: 10px;
+}
+
+.list li {
+    padding: 25px;
+    background: #FAFAAF;
+    border-radius: 5px;
+    margin-bottom: 5px;
+    text-align: center;
+    font-size: 32px;
+    font-weight: 600;
+}
+
+.center {
+    text-align: center;
+}
+
+h1 {
+    text-align: center;
+}
+
+.mat-spinner-color::ng-deep circle{
+    stroke: $red !important;
+}
+
+/* Success syling */
+
+.mat-button.mat-success,
+.mat-stroked-button.mat-success {
+    color: $black;
+}
+.mat-button.mat-success:hover,
+.mat-stroked-button.mat-success:hover {
+  background-color: #f0fff3;
+}
+
+.mat-raised-button.mat-success,
+.mat-flat-button.mat-success,
+.mat-fab.mat-success,
+.mat-mini-fab.mat-success {
+  color: #f0fff3;
+  background-color: $black;
+}
+
+.mat-icon-button.mat-success {
+  color: $black;
+} 

@@ -1,0 +1,38 @@
+@import '../../../../../assets/styles/variables.scss';
+
+mat-card {
+    width: 200px;
+}
+
+h2 {
+    text-align: center;
+    background-color: $light_yellow;
+    padding: 1rem;
+}
+
+::ng-deep.mat-dialog-content {
+    text-align: center;
+}
+
+/* Success syling */
+
+.mat-button.mat-success,
+.mat-stroked-button.mat-success {
+    color: $black;
+}
+.mat-button.mat-success:hover,
+.mat-stroked-button.mat-success:hover {
+  background-color: #f0fff3;
+}
+
+.mat-raised-button.mat-success,
+.mat-flat-button.mat-success,
+.mat-fab.mat-success,
+.mat-mini-fab.mat-success {
+  color: #f0fff3;
+  background-color: $black;
+}
+
+.mat-icon-button.mat-success {
+  color: $black;
+} 

@@ -4,6 +4,12 @@
     <p><b>ID: </b>{{data.id}}</p>
     <p><b>NAME: </b>{{data.name}}</p>
     <p><b>POWER POINTS: </b>{{data.pp}}</p>
+    <p><b>EFFECTS: </b></p>
+    <p *ngFor="let effect of data.effect">
+        <em>Effect:</em> {{effect.effect}}
+        <br>
+        <em>Short Effect:</em> {{effect.short_effect}}
+    </p>
     <p><b>PRIORITY: </b>{{data.priority}}</p>
     <p><b>CRITICAL RADIUS: </b>{{data.crit_rate}}</p>
     <p><b>FLINCH CHANCE: </b>{{data.flinch_chance}}</p>
@@ -11,8 +17,8 @@
     <p><b>POWER: </b> {{data.power}}</p>
 </mat-dialog-content>
 
-<mat-dialog-actions>
-    <button mat-icon-button color="warn" aria-label="close" (click)="close()">
+<mat-dialog-actions fxLayout fxFill fxLayoutAlign="space-around center">
+    <button mat-icon-button color="success" aria-label="close" (click)="close()">
         <mat-icon>close</mat-icon>
     </button>
 </mat-dialog-actions>

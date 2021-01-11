@@ -1,11 +1,33 @@
-<p>pokemon-dialog-body works!</p>
-<h2 mat-dialog-title>This is a Dialog title {{data.id}}</h2>
+<h2 mat-dialog-title>{{data.name | uppercase}}</h2>
 
 <mat-dialog-content>
-
-<p> Place content here. {{data.name}}</p>
+    <div fxLayout="row" fxLayoutGap="1.5rem grid">
+        <div fxFlex="50%" fxFlex.xs="100%" fxFlex.sm="100%">
+            <img [src]="data.sprites.other.dream_world.front_default" [alt]="data.name" width="200px">
+        </div>
+        <div fxFlex="50%" fxFlex.xs="100%" fxFlex.sm="100%">
+            <p><b>ID: </b>{{data.id}}</p>
+            <p><b>NAME: </b>{{data.name}}</p>
+        </div>
+    </div>  
+    <div fxLayout="column">
+        <mat-tab-group mat-align-tabs="center" style="height: 13rem;">
+            <mat-tab label="Stats">
+                <div *ngFor="let stat of data.stats">
+                    <b>{{stat.base_stat}}</b>: {{stat.stat.name}}
+                </div>
+            </mat-tab>>
+            <mat-tab label="Types">
+                <div *ngFor="let type of data.types">
+                    {{type.type.name}} 
+                </div>
+            </mat-tab>
+        </mat-tab-group>
+    </div>
 </mat-dialog-content>
 
-<mat-dialog-actions>
-    <button class="mat-raised-button" (click)="close()">Close</button>
+<mat-dialog-actions fxLayout fxFill fxLayoutAlign="space-around center">
+    <button mat-icon-button color="success" aria-label="close" (click)="close()">
+        <mat-icon>close</mat-icon>
+    </button>
 </mat-dialog-actions>
