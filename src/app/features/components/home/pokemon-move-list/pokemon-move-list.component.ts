@@ -78,7 +78,6 @@ export class PokemonMoveListComponent implements OnInit {
     this.moveList = this.copyMoveList;
   }
 
-
   clear() {
     this.moveForm.reset();
   }
@@ -95,14 +94,70 @@ export class PokemonMoveListComponent implements OnInit {
 
   onSubmit() {
     console.log(this.moveForm.value);
+
     let name: string = this.moveForm.value.name;
+    let type_name: string = this.moveForm.value.type_name;
+    let category_name: string = this.moveForm.value.category_name;
+
     let moveFilter = {};
-    if(name && name.length > 0 ){
-      moveFilter = {name: name};
-      console.log(moveFilter);
-      this.moveList = this.filterPipe.transform(this.moveList, moveFilter); 
-    } else {
+    let moveNameFilter = {name: name};
+    let moveTypeFilter = {type_name: type_name};
+    let moveCategoryFilter = {category_name: category_name};
+
+    if( (name && name.length > 0) &&
+        (type_name && type_name.length > 0) &&
+        (category_name && category_name.length > 0) ){
+        // Filter by all fields.
+        this.moveList = this.filterPipe.transform(this.moveList, moveNameFilter); 
+        this.moveList = this.filterPipe.transform(this.moveList, moveTypeFilter); 
+        this.moveList = this.filterPipe.transform(this.moveList, moveCategoryFilter); 
+    } else if ((name && name.length > 0) && 
+              (type_name && type_name.length > 0) && 
+              (category_name == null || category_name.length <= 0)) {
+        // Filter by name and type.
+        this.moveList = this.copyMoveList;
+        this.moveList = this.filterPipe.transform(this.moveList, moveNameFilter); 
+        this.moveList = this.filterPipe.transform(this.moveList, moveTypeFilter);      
+    } else if ((name && name.length > 0) && 
+              (type_name == null || type_name.length <= 0) && 
+              (category_name && category_name.length > 0)) {
+        // Filter by name and category.
+        this.moveList = this.copyMoveList;
+        this.moveList = this.filterPipe.transform(this.moveList, moveNameFilter); 
+        this.moveList = this.filterPipe.transform(this.moveList, moveCategoryFilter);      
+    } else if ((name == null || name.length <= 0) && 
+              (type_name && type_name.length > 0) &&
+              (category_name && category_name.length > 0)) {
+        // Filter by type and category.
+        this.moveList = this.copyMoveList;
+        this.moveList = this.filterPipe.transform(this.moveList, moveTypeFilter); 
+        this.moveList = this.filterPipe.transform(this.moveList, moveCategoryFilter);      
+    } else if ((name && name.length > 0) && 
+              (type_name == null || type_name.length <= 0) && 
+              (category_name == null || category_name.length <= 0)) {
+        // Filter by name.
+        this.moveList = this.copyMoveList;
+        this.moveList = this.filterPipe.transform(this.moveList, moveNameFilter);  
+    } else if ((name == null || name.length <= 0) && 
+              (type_name && type_name.length > 0) &&
+              (category_name == null || category_name.length <= 0)) {
+        // Filter by type.
+        this.moveList = this.copyMoveList;
+        this.moveList = this.filterPipe.transform(this.moveList, moveTypeFilter); 
+    } else if ((name == null || name.length <= 0) && 
+                (type_name == null || type_name.length <= 0) && 
+                (category_name && category_name.length > 0)) {
+        // Filter by category.
+        this.moveList = this.copyMoveList;
+        this.moveList = this.filterPipe.transform(this.moveList, moveCategoryFilter); 
+    } else if ((name == null || name.length <= 0) && 
+              (type_name == null || type_name.length <= 0) && 
+              (category_name == null || category_name.length <= 0)) {
+      // Filter by category.
       this.moveList = this.copyMoveList;
+    } else {
+        // Without filters.
+        this.moveList = this.copyMoveList;
     }  
   }
 
