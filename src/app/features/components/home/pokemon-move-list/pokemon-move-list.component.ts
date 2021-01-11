@@ -22,7 +22,7 @@ export class PokemonMoveListComponent implements OnInit {
   moveForm: FormGroup;
   options: string[] = [];
   filteredOptions: Observable<string[]>;
-  categories: string[] = ["1", "2"];
+  categories: string[] = [];
   filteredCategories: Observable<string[]>;
 
   constructor(private matDialog: MatDialog, 
@@ -110,7 +110,7 @@ export class PokemonMoveListComponent implements OnInit {
     const response = await this._pokemon.getTypes().toPromise();
     if(response) {
       let types = response.results;
-      for(let type of types){
+      for(let type of types) {
         this.options.push(type.name);
       }
       this.filteredOptions = this.moveForm.controls['type_name'].valueChanges.pipe(
@@ -119,10 +119,17 @@ export class PokemonMoveListComponent implements OnInit {
       );
     }
 
-    this.filteredCategories = this.moveForm.controls['category_name'].valueChanges.pipe(
-      startWith(""), 
-      map(val => this.filterCategory(val))
-    );
+    const response_categories = await this._pokemon.getCategories().toPromise();
+    if(response_categories) {
+      let categories_result = response_categories.results;
+      for(let cat of categories_result) {
+        this.categories.push(cat.name);
+      }
+      this.filteredCategories = this.moveForm.controls['category_name'].valueChanges.pipe(
+        startWith(""), 
+        map(val => this.filterCategory(val))
+      );
+    }
   }
 
   filterType(val: string): string[] {
