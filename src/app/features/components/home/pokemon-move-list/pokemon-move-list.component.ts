@@ -3,6 +3,7 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { PokemonMoveDialogBodyComponent } from '../pokemon-move-dialog-body/pokemon-move-dialog-body.component';
 import { PokemonService } from '../../../services/pokemon.service';
 import { SortPipe } from '../../../../shared/pipes/sort.pipe';
+import { FilterPipe } from '../../../../shared/pipes/filter.pipe';
 
 @Component({
   selector: 'app-pokemon-move-list',
@@ -17,7 +18,8 @@ export class PokemonMoveListComponent implements OnInit {
 
   constructor(private matDialog: MatDialog, 
               private _pokemon: PokemonService,
-              private sortPipe: SortPipe) { 
+              private sortPipe: SortPipe, 
+              private filterPipe: FilterPipe) { 
   }
 
   ngOnInit(): void {
@@ -61,5 +63,16 @@ export class PokemonMoveListComponent implements OnInit {
     this.moveList = this.sortPipe.transform(this.moveList, "asc", "name");
     console.log(this.moveList);
   }
+
+  // Filter.
+  people = [
+    {name: 'John', age: 27, sex: 'male'},
+    {name: 'Lara', age: 21, sex: 'female'},
+    {name: 'Rick', age: 29, sex: 'male'},
+    {name: 'Eva',  age: 27, sex: 'female'},
+    {name: 'Mike', age: 27, sex: 'male'}
+  ];
+
+  peopleFilter = {age: 27, sex: 'male'};
 
 }

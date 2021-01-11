@@ -1,3 +1,7 @@
+<div *ngFor="let person of people | filter: peopleFilter">
+    {{person.name}}
+</div>
+
 <div *ngIf="chargeData; else elseBlock">
     <!--<h1 style="text-align: right; padding-right: 1rem;">Moves</h1> -->
     <section>

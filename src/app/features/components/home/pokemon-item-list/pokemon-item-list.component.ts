@@ -4,6 +4,7 @@ import { PokemonService } from '../../../services/pokemon.service';
 import { SortPipe } from '../../../../shared/pipes/sort.pipe';
 import { PokemonItemDialogBodyComponent } from '../pokemon-item-dialog-body/pokemon-item-dialog-body.component';
 import { ItemAll } from '../../../../shared/models/itemAll';
+import { FilterPipe } from '../../../../shared/pipes/filter.pipe';
 
 @Component({
   selector: 'app-pokemon-item-list',
@@ -19,7 +20,8 @@ export class PokemonItemListComponent implements OnInit {
 
   constructor(private matDialog: MatDialog, 
               private _pokemon: PokemonService,
-              private sortPipe: SortPipe) { 
+              private sortPipe: SortPipe,
+              private filterPipe: FilterPipe) { 
   }
 
   ngOnInit(): void {
@@ -60,17 +62,14 @@ export class PokemonItemListComponent implements OnInit {
   }
 
   filter(value) {
-    this.itemList = [];
-    for(let item of this.copyItemList) {
-      if(value.name && value.name.length > 0 && item.name.toString().toLocaleLowerCase().includes(value.name.toString().toLocaleLowerCase())){
-        this.itemList.push(item);
-      }
-    }
-
-    if(this.itemList.length <= 0) {
+    let itemFilter = {};
+    if(value.name && value.name.length > 0 ){
+      itemFilter = {name: value.name};
+      console.log(itemFilter);
+      this.itemList = this.filterPipe.transform(this.itemList, itemFilter);
+    } else {
       this.itemList = this.copyItemList;
-    }
-    
+    }  
   }
 
   clear() {
