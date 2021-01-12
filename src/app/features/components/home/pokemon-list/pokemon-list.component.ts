@@ -77,8 +77,6 @@ export class PokemonListComponent implements OnInit {
 
   orderById() {
     this.pokemonList = this.copyPokemonList;
-    this.pokemonList = this.sortPipe.transform(this.pokemonList, "asc", "id");
-    console.log(this.pokemonList);
   }
 
   initForm() {
@@ -323,5 +321,8 @@ export class PokemonListComponent implements OnInit {
     return pokemonListByTypes;
   }
 
+  originalList() {
+    this.pokemonList = this.copyPokemonList;
+  }
 
 }
