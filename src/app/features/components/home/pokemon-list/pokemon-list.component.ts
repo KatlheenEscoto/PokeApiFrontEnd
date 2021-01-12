@@ -17,7 +17,7 @@ import { map, startWith } from 'rxjs/operators';
 })
 export class PokemonListComponent implements OnInit {
 
-  @Input() pokemonList;
+  @Input() pokemonList: Pokemon[];
   @Input() chargeData;
   copyPokemonList: Pokemon[];
   pokemonForm: FormGroup;
@@ -76,6 +76,7 @@ export class PokemonListComponent implements OnInit {
   }
 
   orderById() {
+    this.pokemonList = this.copyPokemonList;
     this.pokemonList = this.sortPipe.transform(this.pokemonList, "asc", "id");
     console.log(this.pokemonList);
   }
@@ -95,22 +96,55 @@ export class PokemonListComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.pokemonForm.value.types);
+    console.log(this.pokemonForm.value);
 
     let name: string = this.pokemonForm.value.name;
+    let ability: string = this.pokemonForm.value.ability_name;
+    let types = this.pokemonForm.value.types;
+    let type1: string;
+    let type2: string;
+    if(types != null) {
+      type1 = this.pokemonForm.value.types[0];
+      type2 = this.pokemonForm.value.types[1];
+    }
 
     let pokemonNameFilter = {name: name};
 
-    if( (name && name.length > 0) ){
+    if ((name && name.length > 0) && 
+        (ability && name.length > 0) &&
+        (types != null) &&
+        (type1 && type1.length > 0) &&
+        (type2 && type2.length > 0))
+    {
+      // Filter by: name, ability, type1, type2.
+
+      this.pokemonList = this.copyPokemonList;
+      this.pokemonList = this.filterPipe.transform(this.pokemonList, pokemonNameFilter);
+      this.pokemonList = this.filterByAbilities(this.pokemonList, ability);
+      this.pokemonList = this.filterByTypes(this.pokemonList, type1);
+      this.pokemonList = this.filterByTypes(this.pokemonList, type2);
+
+    } else if((name == null || name.length <= 0) && 
+              (ability == null || ability.length <= 0) && 
+              (types == null))
+    {
+      // Without filters.
+      this.pokemonList = this.copyPokemonList;
+    } else {
+      // Without filters.
+      this.pokemonList = this.copyPokemonList;
+    }
+
+
+
+    /* if( (name && name.length > 0) ){
       // Find By Name.
       this.pokemonList = this.copyPokemonList;
       this.pokemonList = this.filterPipe.transform(this.pokemonList, pokemonNameFilter);
     } else if ((name == null || name.length <= 0)) {
       this.pokemonList = this.copyPokemonList;
     } else {
-      // Without filters.
-      this.pokemonList = this.copyPokemonList;
-    }
+    } */
   }
 
   async getData() {
@@ -147,5 +181,34 @@ export class PokemonListComponent implements OnInit {
   getTypes(): FormArray {
     return this.pokemonForm.get('types') as FormArray;
   }
+
+  filterByAbilities(pokemons, ability) {
+
+    let pokemonListByAbilities = [];
+    for(let pokemon of pokemons) {
+      for(let pokemon_ability of pokemon.abilities) {
+        console.log(pokemon_ability.ability.name);
+        if(pokemon_ability.ability.name.toString().toLocaleLowerCase().includes(ability.toString().toLocaleLowerCase())){
+          pokemonListByAbilities.push(pokemon);
+        }
+      }
+    }
+    return pokemonListByAbilities;
+  }
+
+  filterByTypes(pokemons, type) {
+
+    let pokemonListByTypes = [];
+    for(let pokemon of pokemons) {
+      for(let pokemon_type of pokemon.types) {
+        console.log(pokemon_type.type.name);
+        if(pokemon_type.type.name.toString().toLocaleLowerCase().includes(type.toString().toLocaleLowerCase())){
+          pokemonListByTypes.push(pokemon);
+        }
+      }
+    }
+    return pokemonListByTypes;
+  }
+
 
 }
