@@ -4,8 +4,8 @@ import { SortPipe } from '../../../../shared/pipes/sort.pipe';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { PokemonDialogBodyComponent } from '../pokemon-dialog-body/pokemon-dialog-body.component';
 import { PokemonAll } from '../../../../shared/models/pokemonAll';
-import { FormGroup, FormBuilder } from '@angular/forms';
-import { Pokemon } from '../../../../shared/models/pokemon';
+import { FormGroup, FormBuilder, FormArray, FormControl } from '@angular/forms';
+import { Pokemon, Type } from '../../../../shared/models/pokemon';
 import { FilterPipe } from '../../../../shared/pipes/filter.pipe';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
@@ -23,6 +23,8 @@ export class PokemonListComponent implements OnInit {
   pokemonForm: FormGroup;
   options: string[] = [];
   filteredOptions: Observable<string[]>;
+  typesOfShoes = ['Boots', 'Clogs', 'Loafers', 'Moccasins', 'Sneakers'];
+  typesPokemon = [];
 
 
   constructor(private matDialog: MatDialog, 
@@ -82,6 +84,7 @@ export class PokemonListComponent implements OnInit {
     this.pokemonForm = this.formBuilder.group(
       {
         name: [''],
+        types: new FormControl([]),
         ability_name: ['']
       }
     );
@@ -92,7 +95,7 @@ export class PokemonListComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.pokemonForm.value);
+    console.log(this.pokemonForm.value.types);
 
     let name: string = this.pokemonForm.value.name;
 
@@ -111,16 +114,27 @@ export class PokemonListComponent implements OnInit {
   }
 
   async getData() {
+
+    // Abilities.
     const response = await this._pokemon.getAbilities().toPromise();
     if(response) {
-      let types = response.results;
-      for(let type of types) {
-        this.options.push(type.name);
+      let abilities = response.results;
+      for(let ability of abilities) {
+        this.options.push(ability.name);
       }
       this.filteredOptions = this.pokemonForm.controls['ability_name'].valueChanges.pipe(
         startWith(""), 
         map(val => this.filterType(val))
       );
+    }
+
+    // Types.
+    const responseTypes = await this._pokemon.getTypes().toPromise();
+    if(responseTypes) {
+      let types = responseTypes.results;
+      for(let type of types) {
+        this.typesPokemon.push(type.name);
+      }
     }
   }
 
@@ -128,6 +142,10 @@ export class PokemonListComponent implements OnInit {
     return this.options.filter(option => {
       return option.toLowerCase().match(val.toLowerCase());
     });
+  }
+
+  getTypes(): FormArray {
+    return this.pokemonForm.get('types') as FormArray;
   }
 
 }

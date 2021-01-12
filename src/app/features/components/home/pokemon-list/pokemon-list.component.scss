@@ -58,3 +58,8 @@ h1 {
 .mat-icon-button.mat-success {
   color: $black;
 } 
+
+.form-group {
+    height: 10rem; 
+    overflow: auto;
+}

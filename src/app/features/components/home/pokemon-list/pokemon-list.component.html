@@ -30,6 +30,18 @@
                           <mat-icon matSuffix>search</mat-icon> 
                       </mat-form-field>
                   </p>
+                  <p class="form-group">
+                    <mat-label><h4>Find by types</h4></mat-label>
+                    <mat-selection-list #types formControlName="types">
+                      <mat-list-option
+                          #type
+                          *ngFor="let typePokemon of typesPokemon"
+                          [value]="typePokemon"
+                          [disabled]="types.selectedOptions.selected.length >= 2 && !type.selected">
+                        {{typePokemon}}
+                      </mat-list-option>
+                    </mat-selection-list>
+                  </p>
                   <section>
                     <div class="example-button-row">
                         <button mat-raised-button color="primary" style="margin-right: 0.2rem;" type="submit">Filter</button>
