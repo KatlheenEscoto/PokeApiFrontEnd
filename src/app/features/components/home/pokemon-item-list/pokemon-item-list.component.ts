@@ -67,6 +67,8 @@ export class PokemonItemListComponent implements OnInit {
       itemFilter = {name: value.name};
       console.log(itemFilter);
       this.itemList = this.filterPipe.transform(this.itemList, itemFilter);
+    } else if(value.name == null){
+      this.itemList = this.copyItemList;
     } else {
       this.itemList = this.copyItemList;
     }  

@@ -19,7 +19,7 @@ export class PokemonItemSearchComponent implements OnInit {
 
   constructor(private _pokemon: PokemonService) { 
     this.startIndex = 1;
-    this.finalIndex = 500;
+    this.finalIndex = 200;
   }
 
   ngOnInit(): void {
