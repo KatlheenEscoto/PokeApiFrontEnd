@@ -49,7 +49,7 @@ export class Move {
     version_group_details: Versiongroupdetail[];
 }
   
-export interface Versiongroupdetail {
+export class Versiongroupdetail {
     level_learned_at: number;
     move_learn_method: Base;
     version_group: Base;
@@ -60,6 +60,7 @@ export class Gameindex {
     version: Base;
 }
   
+
 export class Ability {
     ability: Base;
     is_hidden: boolean;

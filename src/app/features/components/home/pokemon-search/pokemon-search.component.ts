@@ -39,6 +39,11 @@ export class PokemonSearchComponent implements OnInit {
       this.pokemon.id = response.id;
       this.pokemon.image = response.sprites.other.dream_world.front_default;
       this.pokemon.specie = response.species.name;
+      this.pokemon.stats = response.stats;
+      this.pokemon.types = response.types;
+      this.pokemon.abilities = response.abilities;// List.
+      this.pokemon.height = response.height,
+      this.pokemon.weight = response.weight
       this.pokemons.push(this.pokemon);
     }
   }

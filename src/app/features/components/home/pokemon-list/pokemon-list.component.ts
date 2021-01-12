@@ -4,6 +4,9 @@ import { SortPipe } from '../../../../shared/pipes/sort.pipe';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { PokemonDialogBodyComponent } from '../pokemon-dialog-body/pokemon-dialog-body.component';
 import { PokemonAll } from '../../../../shared/models/pokemonAll';
+import { FormGroup, FormBuilder } from '@angular/forms';
+import { Pokemon } from '../../../../shared/models/pokemon';
+import { FilterPipe } from '../../../../shared/pipes/filter.pipe';
 
 @Component({
   selector: 'app-pokemon-list',
@@ -14,14 +17,19 @@ export class PokemonListComponent implements OnInit {
 
   @Input() pokemonList;
   @Input() chargeData;
+  copyPokemonList: Pokemon[];
+  pokemonForm: FormGroup;
 
 
   constructor(private matDialog: MatDialog, 
-    private _pokemon: PokemonService,
-    private sortPipe: SortPipe) { 
-  }
+              private _pokemon: PokemonService,
+              private sortPipe: SortPipe,
+              private formBuilder: FormBuilder,
+              private filterPipe: FilterPipe) { }
 
   ngOnInit(): void {
+    this.copyPokemonList = this.pokemonList;
+    this.initForm();
   }
 
   openDialog(id: number) {
@@ -33,10 +41,13 @@ export class PokemonListComponent implements OnInit {
           dialogConfig.data = {
             id: id.toString(),
             name: response.name,
-            sprites: response.sprites,
+            image: response.sprites.other.dream_world.front_default,
             stats: response.stats, // List.
             types: response.types, // List.
-            moves: response.moves // List.
+            abilities: response.abilities, // List.
+            moves: response.moves, // List.
+            height: response.height,
+            weight: response.weight
           }
           this.matDialog.open(PokemonDialogBodyComponent, dialogConfig);
         }
@@ -62,4 +73,33 @@ export class PokemonListComponent implements OnInit {
     console.log(this.pokemonList);
   }
 
+  initForm() {
+    this.pokemonForm = this.formBuilder.group(
+      {
+        name: ['']
+      }
+    );
+  }
+
+  clear() {
+    this.pokemonForm.reset();
+  }
+
+  onSubmit() {
+    console.log(this.pokemonForm.value);
+
+    let name: string = this.pokemonForm.value.name;
+
+    let pokemonNameFilter = {name: name};
+
+    if( (name && name.length > 0) ){
+      this.pokemonList = this.copyPokemonList;
+      this.pokemonList = this.filterPipe.transform(this.pokemonList, pokemonNameFilter);
+    } else if ((name == null || name.length <= 0)) {
+      this.pokemonList = this.copyPokemonList;
+    } else {
+      // Without filters.
+      this.pokemonList = this.copyPokemonList;
+    }
+  }
 }

@@ -1,7 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { Pokemon } from '../../../../shared/models/pokemon';
-import { PokemonAll, Versiongroupdetail, Move } from '../../../../shared/models/pokemonAll';
+import { Pokemon, VersionGroupDetails, Move } from '../../../../shared/models/pokemon';
+import { Base } from '../../../../shared/interface/base';
 
 @Component({
   selector: 'app-pokemon-dialog-body',
@@ -10,14 +10,11 @@ import { PokemonAll, Versiongroupdetail, Move } from '../../../../shared/models/
 })
 export class PokemonDialogBodyComponent implements OnInit {
 
-  moves: Move[];
-  versions: Versiongroupdetail[];
-
-
   constructor( public dialogRef: MatDialogRef<PokemonDialogBodyComponent>,
-               @Inject(MAT_DIALOG_DATA) public data: PokemonAll) { }
+               @Inject(MAT_DIALOG_DATA) public data: Pokemon) { }
 
   ngOnInit(): void {
+    
   }
 
   close() {

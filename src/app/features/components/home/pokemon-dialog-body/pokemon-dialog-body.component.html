@@ -3,23 +3,30 @@
 <mat-dialog-content>
     <div fxLayout="row" fxLayoutGap="1.5rem grid">
         <div fxFlex="50%" fxFlex.xs="100%" fxFlex.sm="100%">
-            <img [src]="data.sprites.other.dream_world.front_default" [alt]="data.name" width="200px" height="200px">
+            <img [src]="data.image" [alt]="data.name" width="200px" height="200px">
         </div>
         <div fxFlex="50%" fxFlex.xs="100%" fxFlex.sm="100%">
             <p><b>ID: </b>{{data.id}}</p>
             <p><b>NAME: </b>{{data.name}}</p>
+            <p><b>HEIGHT:</b> {{data.height}}</p>
+            <p><b>WEIGHT: </b>{{data.weight}}</p>
         </div>
     </div>  
-    <div fxLayout="column" >
+    <div fxLayout="column">
         <mat-tab-group mat-align-tabs="center" style="height: 13rem;">
             <mat-tab label="Stats">
                 <div *ngFor="let stat of data.stats">
                     <b>{{stat.base_stat}}</b>: {{stat.stat.name}}
                 </div>
-            </mat-tab>>
+            </mat-tab>
             <mat-tab label="Types">
                 <div *ngFor="let type of data.types">
                     {{type.type.name}} 
+                </div>
+            </mat-tab>
+            <mat-tab label="Abilities">
+                <div *ngFor="let ability of data.abilities">
+                    {{ability.ability.name}} 
                 </div>
             </mat-tab>
         </mat-tab-group>

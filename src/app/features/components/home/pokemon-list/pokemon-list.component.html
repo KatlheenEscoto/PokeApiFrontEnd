@@ -1,21 +1,48 @@
 <div *ngIf="chargeData; else elseBlock">
-    
-  <section class="buttons">
-      Order By:
-      <div class="example-button-row">
-        <button mat-raised-button color="success" (click)="orderByAsc()" style="margin-right: 0.2rem;">A-Z</button>
-        <button mat-raised-button color="success" (click)="orderByDesc()" style="margin-right: 0.2rem;">Z-A</button>
-        <button mat-raised-button color="success" (click)="orderById()"># Pokedex</button>
-      </div>
-  </section>
+  <h1>Pokemons</h1>
 
-  <ul class="list">
-      <cdk-virtual-scroll-viewport  style="height: 450px" itemSize="90" >
-          <ng-container *cdkVirtualFor="let pokemon of pokemonList">
-          <li><button mat-button (click)="openDialog(pokemon.id)">{{pokemon.name}}</button></li>
-          </ng-container>
-      </cdk-virtual-scroll-viewport>
-  </ul>
+  <div fxLayout="row wrap" fxLayoutGap="1.5rem grid">
+          <div fxFlex="50%" fxFlex.xs="100%" fxFlex.sm="100%">
+            <section>
+              <h2>Filter By</h2>
+              <div>
+                <form [formGroup]="pokemonForm" (ngSubmit)="onSubmit()">
+                  <p>
+                    <mat-form-field appearance="outline">
+                      <mat-label>Filter by name</mat-label>
+                      <input matInput type="text" name="name" placeholder="Filter by name" formControlName="name">
+                      <mat-icon matSuffix>search</mat-icon>   
+                    </mat-form-field>
+                  </p> 
+                  <section>
+                    <div class="example-button-row">
+                        <button mat-raised-button color="primary" style="margin-right: 0.2rem;" type="submit">Filter</button>
+                        <button mat-raised-button color="primary" style="margin-right: 0.2rem;" type="button" (click)="clear()">Clear</button>
+                    </div>
+                  </section>
+                </form>
+              </div>
+            </section>
+            <br>
+            <section class="buttons">
+                <h2>Order By</h2>
+                <div class="example-button-row">
+                  <button mat-raised-button color="success" (click)="orderByAsc()" style="margin-right: 0.2rem;">A-Z</button>
+                  <button mat-raised-button color="success" (click)="orderByDesc()" style="margin-right: 0.2rem;">Z-A</button>
+                  <button mat-raised-button color="success" (click)="orderById()"># Pokedex</button>
+                </div>
+            </section>
+          </div>
+          <div fxFlex="50%" fxFlex.xs="100%" fxFlex.sm="100%">
+            <ul class="list">
+                <cdk-virtual-scroll-viewport  style="height: 450px" itemSize="90" >
+                    <ng-container *cdkVirtualFor="let pokemon of pokemonList">
+                    <li><button mat-button (click)="openDialog(pokemon.id)">{{pokemon.name}}</button></li>
+                    </ng-container>
+                </cdk-virtual-scroll-viewport>
+            </ul>
+          </div>
+  </div>
 </div>
 <ng-template #elseBlock>
   <div fxLayout="column" fxLayoutAlign="center center">
