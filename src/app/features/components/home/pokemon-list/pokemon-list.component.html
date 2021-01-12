@@ -14,6 +14,22 @@
                       <mat-icon matSuffix>search</mat-icon>   
                     </mat-form-field>
                   </p> 
+                    <p>
+                      <mat-form-field appearance="outline">
+                          <mat-label>Find by ability</mat-label>
+                          <input
+                            matInput 
+                            type="text" 
+                            formControlName="ability_name"
+                            [matAutocomplete]="auto1" />
+                          <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" #auto1>
+                            <mat-option *ngFor="let option of options" [value]="option">
+                              {{ option }}
+                            </mat-option>
+                          </mat-autocomplete>
+                          <mat-icon matSuffix>search</mat-icon> 
+                      </mat-form-field>
+                  </p>
                   <section>
                     <div class="example-button-row">
                         <button mat-raised-button color="primary" style="margin-right: 0.2rem;" type="submit">Filter</button>

@@ -46,4 +46,8 @@ export class PokemonService {
     return this.http.get<any>(`${this.baseUrl}/move-category`);
   }
 
+  getAbilities() {
+    return this.http.get<any>(`${this.baseUrl}/ability/?offset=0&limit=20`);
+  }
+
 }

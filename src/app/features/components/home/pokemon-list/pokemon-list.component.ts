@@ -7,6 +7,8 @@ import { PokemonAll } from '../../../../shared/models/pokemonAll';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { Pokemon } from '../../../../shared/models/pokemon';
 import { FilterPipe } from '../../../../shared/pipes/filter.pipe';
+import { Observable } from 'rxjs';
+import { map, startWith } from 'rxjs/operators';
 
 @Component({
   selector: 'app-pokemon-list',
@@ -19,6 +21,8 @@ export class PokemonListComponent implements OnInit {
   @Input() chargeData;
   copyPokemonList: Pokemon[];
   pokemonForm: FormGroup;
+  options: string[] = [];
+  filteredOptions: Observable<string[]>;
 
 
   constructor(private matDialog: MatDialog, 
@@ -30,6 +34,7 @@ export class PokemonListComponent implements OnInit {
   ngOnInit(): void {
     this.copyPokemonList = this.pokemonList;
     this.initForm();
+    this.getData();
   }
 
   openDialog(id: number) {
@@ -76,7 +81,8 @@ export class PokemonListComponent implements OnInit {
   initForm() {
     this.pokemonForm = this.formBuilder.group(
       {
-        name: ['']
+        name: [''],
+        ability_name: ['']
       }
     );
   }
@@ -93,6 +99,7 @@ export class PokemonListComponent implements OnInit {
     let pokemonNameFilter = {name: name};
 
     if( (name && name.length > 0) ){
+      // Find By Name.
       this.pokemonList = this.copyPokemonList;
       this.pokemonList = this.filterPipe.transform(this.pokemonList, pokemonNameFilter);
     } else if ((name == null || name.length <= 0)) {
@@ -102,4 +109,25 @@ export class PokemonListComponent implements OnInit {
       this.pokemonList = this.copyPokemonList;
     }
   }
+
+  async getData() {
+    const response = await this._pokemon.getAbilities().toPromise();
+    if(response) {
+      let types = response.results;
+      for(let type of types) {
+        this.options.push(type.name);
+      }
+      this.filteredOptions = this.pokemonForm.controls['ability_name'].valueChanges.pipe(
+        startWith(""), 
+        map(val => this.filterType(val))
+      );
+    }
+  }
+
+  filterType(val: string): string[] {
+    return this.options.filter(option => {
+      return option.toLowerCase().match(val.toLowerCase());
+    });
+  }
+
 }
