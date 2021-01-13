@@ -54,8 +54,13 @@ export class PokemonFormSearchComponent implements OnInit {
                 let start = resp.pokemon_entries[0].pokemon_species.url.split('/')[6];
                 let final = resp.pokemon_entries[resp.pokemon_entries.length-1].pokemon_species.url.split('/')[6];
                 console.log(`Start: ${start}, Final: ${final}`);
-                this.startIndex = start;
-                this.finalIndex = final;
+                if(start < final){
+                  this.startIndex = start;
+                  this.finalIndex = final;
+                } else {
+                  this.startIndex = final;
+                  this.finalIndex = start;
+                }
                 this.flagSearch = true;
               
             }

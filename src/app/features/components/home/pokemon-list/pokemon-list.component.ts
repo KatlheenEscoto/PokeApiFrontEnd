@@ -143,6 +143,18 @@ export class PokemonListComponent implements OnInit {
       this.pokemonList = this.filterByAbilities(this.pokemonList, ability);
       this.pokemonList = this.filterByTypes(this.pokemonList, type1);
 
+    }
+    else if((name && name.length > 0) && 
+            (ability == null || ability.length <= 0) && 
+            (types != null) &&
+            (type1 && type1.length > 0) &&
+            (type2 && type2.length > 0)) {
+      // Filter by: name, type1, type2.
+      console.log('Filter by: name, type1, type2.');
+      this.pokemonList = this.copyPokemonList;
+      this.pokemonList = this.filterPipe.transform(this.pokemonList, pokemonNameFilter);
+      this.pokemonList = this.filterByTypes(this.pokemonList, type1);
+      this.pokemonList = this.filterByTypes(this.pokemonList, type2); 
     } 
 
     else if((name == null || name.length <= 0) &&
@@ -160,7 +172,7 @@ export class PokemonListComponent implements OnInit {
 
     else if ((name && name.length > 0) && 
             (ability && ability.length > 0) &&
-            (types == null))
+            (types == null || types.length <= 0))
     {
     // Filter by: name and ability.
     console.log('name and ability');
