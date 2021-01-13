@@ -108,6 +108,7 @@ export class PokemonMoveListComponent implements OnInit {
         (type_name && type_name.length > 0) &&
         (category_name && category_name.length > 0) ){
         // Filter by all fields.
+        this.moveList = this.copyMoveList;
         this.moveList = this.filterPipe.transform(this.moveList, moveNameFilter); 
         this.moveList = this.filterPipe.transform(this.moveList, moveTypeFilter); 
         this.moveList = this.filterPipe.transform(this.moveList, moveCategoryFilter); 

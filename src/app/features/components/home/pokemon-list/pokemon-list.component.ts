@@ -341,8 +341,6 @@ export class PokemonListComponent implements OnInit {
   }
 
   backToSearch(): void {
-    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
-    this.router.onSameUrlNavigation = 'reload';
-    this.router.navigate(['/home']);
+    window.location.reload();
   }
 }
