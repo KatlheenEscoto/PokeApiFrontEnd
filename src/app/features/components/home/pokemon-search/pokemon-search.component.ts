@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { PokemonService } from '../../../services/pokemon.service';
 import { SortPipe } from '../../../../shared/pipes/sort.pipe';
 import { Pokemon } from '../../../../shared/models/pokemon';
@@ -54,6 +54,5 @@ export class PokemonSearchComponent implements OnInit {
     }
     this.chargeData = true;
   }
-
 
 }

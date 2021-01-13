@@ -23,6 +23,7 @@ import { PokemonItemDialogBodyComponent } from './features/components/home/pokem
 import { PokemonItemSearchComponent } from './features/components/home/pokemon-item-search/pokemon-item-search.component';
 import { PokemonItemListComponent } from './features/components/home/pokemon-item-list/pokemon-item-list.component';
 import { FilterPipe } from './shared/pipes/filter.pipe';
+import { PokemonFormSearchComponent } from './features/components/home/pokemon-form-search/pokemon-form-search.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { FilterPipe } from './shared/pipes/filter.pipe';
     PokemonItemDialogBodyComponent,
     PokemonItemSearchComponent,
     PokemonItemListComponent,
-    FilterPipe
+    FilterPipe,
+    PokemonFormSearchComponent
   ],
   imports: [
     BrowserModule,

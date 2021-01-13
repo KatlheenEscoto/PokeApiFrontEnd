@@ -325,4 +325,7 @@ export class PokemonListComponent implements OnInit {
     this.pokemonList = this.copyPokemonList;
   }
 
+  backToSearch(): void {
+    window.location.reload();
+  }
 }

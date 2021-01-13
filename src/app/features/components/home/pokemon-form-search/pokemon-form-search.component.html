@@ -1,0 +1,30 @@
+<section class="intro-section" *ngIf="!flagSearch; else elseBlock">
+    <div
+     fxLayout="column"
+     fxLayout.xs="column" 
+     fxFlexFill
+     fxLayoutAlign="center center"
+    >
+        <h1>Search Pokedex</h1>
+        <form [formGroup]="pokemonForm" (ngSubmit)="onSubmit()">
+            <mat-label>Versions</mat-label>
+            <br>
+            <mat-form-field appearance="fill">
+                <mat-label>Version</mat-label>
+                <mat-select formControlName="versions" (selectionChange)="onChange($event)">
+                  <mat-option *ngFor="let version of versions" [value]="version">
+                    {{version.name}}
+                  </mat-option>
+                </mat-select>
+            </mat-form-field>
+              
+            <div class="example-button-row">
+                <button mat-raised-button color="primary" type="submit">Search</button>
+            </div>
+        </form>
+    </div>
+</section>
+<ng-template #elseBlock>
+    <app-pokemon-search>
+    </app-pokemon-search>
+</ng-template>

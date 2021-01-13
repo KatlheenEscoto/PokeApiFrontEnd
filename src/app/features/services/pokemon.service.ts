@@ -50,4 +50,8 @@ export class PokemonService {
     return this.http.get<any>(`${this.baseUrl}/ability/?offset=0&limit=20`);
   }
 
+  getVersions() {
+    return this.http.get<any>(`${this.baseUrl}/version-group`);
+  }
+
 }
