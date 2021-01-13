@@ -9,6 +9,7 @@ import { Pokemon, Type } from '../../../../shared/models/pokemon';
 import { FilterPipe } from '../../../../shared/pipes/filter.pipe';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-pokemon-list',
@@ -31,7 +32,9 @@ export class PokemonListComponent implements OnInit {
               private _pokemon: PokemonService,
               private sortPipe: SortPipe,
               private formBuilder: FormBuilder,
-              private filterPipe: FilterPipe) { }
+              private filterPipe: FilterPipe,
+              private router: Router
+              ) { }
 
   ngOnInit(): void {
     this.copyPokemonList = this.pokemonList;
@@ -48,7 +51,7 @@ export class PokemonListComponent implements OnInit {
           dialogConfig.data = {
             id: id.toString(),
             name: response.name,
-            image: response.sprites.other.dream_world.front_default,
+            image: response.sprites.other['official-artwork'].front_default,
             stats: response.stats, // List.
             types: response.types, // List.
             abilities: response.abilities, // List.
@@ -326,6 +329,8 @@ export class PokemonListComponent implements OnInit {
   }
 
   backToSearch(): void {
-    window.location.reload();
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+    this.router.onSameUrlNavigation = 'reload';
+    this.router.navigate(['/home']);
   }
 }

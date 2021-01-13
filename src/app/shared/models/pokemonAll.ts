@@ -40,7 +40,7 @@ export class Sprites {
     front_female?: any;
     front_shiny: string;
     front_shiny_female?: any;
-    other: any;
+    other: Other;
     versions: any;
 }
 
@@ -65,4 +65,18 @@ export class Ability {
     ability: Base;
     is_hidden: boolean;
     slot: number;
+}
+
+export class Other {
+    dream_world: Dreamworld;
+    'official-artwork': Officialartwork;
+}
+  
+export class Officialartwork {
+    front_default: string;
+}
+  
+export class Dreamworld {
+    front_default: string;
+    front_female?: any;
 }
