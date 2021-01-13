@@ -54,4 +54,8 @@ export class PokemonService {
     return this.http.get<any>(`${this.baseUrl}/version-group`);
   }
 
+  getUrl(url: string){
+    return this.http.get<any>(url);
+  }
+
 }

@@ -17,7 +17,12 @@
                   </mat-option>
                 </mat-select>
             </mat-form-field>
-              
+            <br>
+            <mat-form-field>
+                <mat-label>Generation</mat-label>
+                <input matInput type="text" name="generation" placeholder="generation" formControlName="generation">
+                <mat-icon matSuffix>search</mat-icon>   
+            </mat-form-field>
             <div class="example-button-row">
                 <button mat-raised-button color="primary" type="submit">Search</button>
             </div>
@@ -25,6 +30,10 @@
     </div>
 </section>
 <ng-template #elseBlock>
-    <app-pokemon-search>
+    <app-pokemon-search 
+        [namePokedex]="namePokedex"
+        [startIndex]="startIndex"
+        [finalIndex]="finalIndex"
+    >
     </app-pokemon-search>
 </ng-template>

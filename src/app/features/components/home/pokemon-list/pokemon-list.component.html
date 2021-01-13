@@ -1,6 +1,4 @@
 <div *ngIf="chargeData; else elseBlock">
-  <h1>Pokemons</h1>
-
   <div fxLayout="row wrap" fxLayoutGap="1.5rem grid">
           <div fxFlex="50%" fxFlex.xs="100%" fxFlex.sm="100%">
             <p>
@@ -54,6 +52,10 @@
                 </form>
               </div>
             </section>
+            
+          </div>
+          <div fxFlex="50%" fxFlex.xs="100%" fxFlex.sm="100%">
+            <br>
             <br>
             <section class="buttons">
                 <h2>Order By</h2>
@@ -63,15 +65,6 @@
                   <button mat-raised-button color="success" (click)="orderById()"># Pokedex</button>
                 </div>
             </section>
-            <br>
-            <section>
-                <h2>Get Original Data</h2>
-                <div class="example-button-row">
-                    <button mat-raised-button color="success" (click)="originalList()">Original</button>
-                </div>
-            </section>
-          </div>
-          <div fxFlex="50%" fxFlex.xs="100%" fxFlex.sm="100%">
             <ul class="list">
                 <cdk-virtual-scroll-viewport  style="height: 450px" itemSize="90" >
                     <ng-container *cdkVirtualFor="let pokemon of pokemonList">

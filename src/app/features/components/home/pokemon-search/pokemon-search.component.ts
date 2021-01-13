@@ -11,11 +11,12 @@ import { PortalInjector } from '@angular/cdk/portal';
   styleUrls: ['./pokemon-search.component.scss']
 })
 export class PokemonSearchComponent implements OnInit {
-
+  
+  @Input() namePokedex;
+  @Input() startIndex: number;
+  @Input() finalIndex: number;
   pokemons:Pokemon[] = [];
   pokemon: Pokemon;
-  startIndex: number;
-  finalIndex: number;
 
   // Flags.
   chargeData: boolean = false;
@@ -23,8 +24,6 @@ export class PokemonSearchComponent implements OnInit {
   constructor(private _pokemon: PokemonService,
               private sortPipe: SortPipe) 
   { 
-    this.startIndex = 1;
-    this.finalIndex = 150;
   }
 
   ngOnInit(): void {
